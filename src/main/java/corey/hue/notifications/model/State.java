@@ -95,6 +95,7 @@ public class State {
     state.setMode(obj.getString("mode"));
     state.setSat(obj.getInt("sat"));
     state.setEffect(obj.getString("effect"));
+    state.setOn(obj.getBoolean("on"));
     JSONArray outerArray = obj.getJSONArray("xy");
    
     double[] xy = parseXy(outerArray);

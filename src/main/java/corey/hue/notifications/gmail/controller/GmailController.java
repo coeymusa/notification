@@ -16,7 +16,7 @@ import corey.hue.notifications.trigger.TriggerService;
 public class GmailController {
   
   private EmailService service = new EmailService();
-  private TriggerRepository triggerRepository = new TriggerRepository();
+  private TriggerBusinessService triggerService = new TriggerBusinessService();
   //Receives requests from a webhook. Currently using automate.io which is connected to gmail account - triggering upon receipt of new email 
   //Sending From, Subject, Body
   @RequestMapping(method = RequestMethod.POST)
@@ -27,7 +27,7 @@ public class GmailController {
   
   @RequestMapping(value = "/addtrigger", method = RequestMethod.POST)
   public ResponseEntity<String> addTrigger(@RequestBody Trigger trigger) throws HttpClientException{
-    triggerRepository.addTrigger(trigger);
+    triggerService.addTrigger(trigger);
     return ResponseEntity.ok().build();
   }
  

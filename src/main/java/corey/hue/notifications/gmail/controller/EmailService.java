@@ -29,10 +29,10 @@ public class EmailService {
     List<Trigger> triggers = populateTriggers();
     
     triggers.forEach(trigger -> {
-      if(email.getBody().contains(trigger.getName())){
+      if(email.getBody().contains((trigger.getName().toLowerCase()))){
         try {
           lightService.handleRequest(trigger.getEffect(),trigger.getColour());
-        } catch (HttpClientException e) {
+        } catch (HttpClientException | InterruptedException e) {
           e.printStackTrace();
         }
       }

@@ -18,7 +18,7 @@ import corey.hue.notifications.model.Trigger;
 public class TriggerRepository {
 
   private static String dbURL = "jdbc:derby://localhost:1527/HueDB;create=true";
-  private static String tableName = "triggers1";
+  private static String tableName = "triggers2";
   // jdbc Connection
   private static Connection conn = null;
   private static Statement statement = null;
@@ -54,7 +54,7 @@ public class TriggerRepository {
       createConnection();
       statement = conn.createStatement();
       String sql = "insert into " + tableName + " values (" +
-          "1, '" + trigger.getName() + "','" + trigger.getEffect() + "','" + trigger.toStringXy() +"')";
+          "1, '" + trigger.getName().toLowerCase() + "','" + trigger.getEffect() + "','" + trigger.toStringXy() +"')";
       statement.execute(sql);
       statement.close();
     }
