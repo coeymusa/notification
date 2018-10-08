@@ -4,7 +4,7 @@ public class Trigger {
 
   private String name;
   private Effect effect;
-  private Colour color;
+  private Colour colour;
   
   public Effect getEffect() {
     return effect;
@@ -12,11 +12,11 @@ public class Trigger {
   public void setEffect(Effect effect) {
     this.effect = effect;
   }
-  public Colour getColor() {
-    return color;
+  public Colour getColour() {
+    return colour;
   }
-  public void setColor(Colour color) {
-    this.color = color;
+  public void setColour(Colour colour) {
+    this.colour = colour;
   }
   public String getName() {
     return name;

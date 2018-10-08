@@ -42,7 +42,7 @@ public class EmailService {
     //call trigger population service
     //read from file
     Trigger trigger = new Trigger();
-    trigger.setColor(Colour.BLUE);
+    trigger.setColour(Colour.BLUE);
     trigger.setName("Shane Dawson");
     trigger.setEffect(Effect.COLORLOOP);
     triggers.add(trigger);

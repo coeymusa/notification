@@ -1,7 +1,9 @@
 package corey.hue.notifications.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Colour {
-  RED(65535),
+  RED(0),
   BLUE(46920),
   GREEN(25500);
 
@@ -13,6 +15,11 @@ public enum Colour {
 
   public int getValue() {
     return this.hue;
+  }
+  
+  @JsonValue
+  public int toValue() {
+      return ordinal();
   }
   
 }

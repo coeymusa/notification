@@ -19,9 +19,8 @@ public class LightService {
     List<Light> ligthsPreviousState = client.getLights(null);
 
     //useEffect
-    List<Light> lightsNewState = changeLights(triggerEffect,colour,ligthsPreviousState);
     //PostChanges
-    client.postLights(lightsNewState);
+    client.postLights(changeLights(triggerEffect,colour,ligthsPreviousState));
     //RevertChanges
 
   }
