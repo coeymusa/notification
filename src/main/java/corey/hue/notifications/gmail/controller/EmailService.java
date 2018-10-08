@@ -11,6 +11,7 @@ import corey.hue.notifications.model.Colour;
 import corey.hue.notifications.model.Effect;
 import corey.hue.notifications.model.Trigger;
 import corey.hue.notifications.service.LightService;
+import corey.hue.notifications.trigger.TriggerRepository;
 
 @Service
 public class EmailService {
@@ -18,16 +19,17 @@ public class EmailService {
   @Value("${corey.hue.email.triggers:Shane Dawson}")
   public String trigger;
 
+  private TriggerRepository triggerRepository = new TriggerRepository();
   List<Trigger> triggers = new ArrayList();
   
   @Autowired
   LightService lightService = new LightService();
 
   public void handleEmail(Email email) throws HttpClientException {
-    populateTriggers();
+    List<Trigger> triggers = populateTriggers();
     
-    triggers.forEach(trig -> {
-      if(email.getBody().contains(trig.getName())){
+    triggers.forEach(trigger -> {
+      if(email.getBody().contains(trigger.getName())){
         try {
           lightService.handleRequest("colorloop", Colour.BLUE);
         } catch (HttpClientException e) {
@@ -37,15 +39,8 @@ public class EmailService {
     });
   }
 
-  private void populateTriggers() {
-  
-    //call trigger population service
-    //read from file
-    Trigger trigger = new Trigger();
-    trigger.setColour(Colour.BLUE);
-    trigger.setName("Shane Dawson");
-    trigger.setEffect(Effect.COLORLOOP);
-    triggers.add(trigger);
+  private  List<Trigger> populateTriggers() {
+    return  triggerRepository.getTriggers();
   }
 
 

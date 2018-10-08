@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.stereotype.Service;
+import corey.hue.notifications.model.Colour;
+import corey.hue.notifications.model.Effect;
 import corey.hue.notifications.model.Trigger;
 
 @Service
@@ -57,8 +61,9 @@ public class TriggerRepository {
     }
   }
 
-  public void getTriggers(){
-    Trigger trigger = new Trigger();
+  public List<Trigger> getTriggers(){
+    createConnection();
+    List<Trigger> triggers = new ArrayList();
     try {
       statement = conn.createStatement();
       ResultSet results = statement.executeQuery("select * from " + tableName);
@@ -71,13 +76,14 @@ public class TriggerRepository {
       System.out.println("\n-------------------------------------------------");
 
       while(results.next()) {
-
-        String name = results.getString(1);
-        String effect = results.getString(2);
-        String colour = results.getString(3);
-        //        trigger.setColor(colour);
-        //        trigger.setEffect(effect);
-        //        trigger.get
+        Trigger trigger = new Trigger();
+        String name = results.getString(2);
+        String effect = results.getString(3);
+        String colour = results.getString(4);
+        trigger.setColour(Colour.valueOf(colour));
+        trigger.setEffect(Effect.valueOf(effect));
+        trigger.setName(name);
+        triggers.add(trigger);
         System.out.println(name + "\t\t" + effect + "\t\t" + colour);
       }
       results.close();
@@ -86,6 +92,7 @@ public class TriggerRepository {
     catch (SQLException sqlExcept){
       sqlExcept.printStackTrace();
     }
+    return triggers;
   }
 
   private static void shutdown()
