@@ -17,3 +17,12 @@ Further implementation for different effects, triggers and configurablity to be 
 
 Requires local installation of derby DB 
 http://www.vogella.com/tutorials/ApacheDerby/article.html Section 2-3.4
+
+To add Trigger: POST http://localhost:7077/addtrigger
+
+{
+    "colour": [0.70, 0.25],
+    "name": "American Horror Story",
+    "effect": "NONE"
+}
+ Colours can be found at https://www.developers.meethue.com/documentation/core-concepts - replacing double values with coordinates desired
