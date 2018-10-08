@@ -21,22 +21,24 @@ public class EmailService {
 
   private TriggerRepository triggerRepository = new TriggerRepository();
   List<Trigger> triggers = new ArrayList();
-  
+
   @Autowired
   LightService lightService = new LightService();
 
   public void handleEmail(Email email) throws HttpClientException {
     List<Trigger> triggers = populateTriggers();
-    
-    triggers.forEach(trigger -> {
-      if(email.getBody().contains((trigger.getName().toLowerCase()))){
-        try {
-          lightService.handleRequest(trigger.getEffect(),trigger.getColour());
-        } catch (HttpClientException | InterruptedException e) {
-          e.printStackTrace();
+
+    if(email != null){
+      triggers.forEach(trigger -> {
+        if(email.getBody().toLowerCase().contains((trigger.getName().toLowerCase()))){
+          try {
+            lightService.handleRequest(trigger.getEffect(),trigger.getColour());
+          } catch (HttpClientException | InterruptedException e) {
+            e.printStackTrace();
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   private  List<Trigger> populateTriggers() {

@@ -23,7 +23,7 @@ public class LightService {
     //PostChanges
     client.postLights(changeLights(effect,colour,newLights));
     //RevertChanges
-    TimeUnit.MINUTES.sleep(1);
+    Thread.sleep(30);
     client.postLights(oldLights);
   }
   

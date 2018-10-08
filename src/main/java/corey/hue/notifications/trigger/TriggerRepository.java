@@ -18,7 +18,7 @@ import corey.hue.notifications.model.Trigger;
 public class TriggerRepository {
 
   private static String dbURL = "jdbc:derby://localhost:1527/HueDB;create=true";
-  private static String tableName = "triggers2";
+  private static String tableName = "triggers3";
   // jdbc Connection
   private static Connection conn = null;
   private static Statement statement = null;
