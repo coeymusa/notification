@@ -20,17 +20,27 @@ public class TriggerRepository {
 
 
   private static void createConnection() {
-      try{
-          Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-          //Get a connection
-          conn = DriverManager.getConnection(dbURL); 
-         // statement = conn.createStatement();
-         //statement.execute("CREATE TABLE " + tableName + " (id INTEGER not NULL, name VARCHAR(255) , effect VARCHAR(255),colour VARCHAR(255))");
-         /// statement.close();
+    try{
+      Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+      //Get a connection
+      conn = DriverManager.getConnection(dbURL); 
+      createTriggerTable();
+    }
+    catch (Exception except){
+      except.printStackTrace();
+    }
+  }
+
+  private static void createTriggerTable() {
+    try{
+      statement = conn.createStatement();
+      statement.execute("CREATE TABLE " + tableName + " (id INTEGER not NULL, name VARCHAR(255) , effect VARCHAR(255),colour VARCHAR(255))");
+      statement.close();
+    } catch( SQLException e ) {
+      if( DerbyHelper.tableAlreadyExists(e)){
+        return; // That's OK
       }
-      catch (Exception except){
-          except.printStackTrace();
-      }
+    }
   }
 
   public void addTrigger(Trigger trigger){
@@ -65,9 +75,9 @@ public class TriggerRepository {
         String name = results.getString(1);
         String effect = results.getString(2);
         String colour = results.getString(3);
-//        trigger.setColor(colour);
-//        trigger.setEffect(effect);
-//        trigger.get
+        //        trigger.setColor(colour);
+        //        trigger.setEffect(effect);
+        //        trigger.get
         System.out.println(name + "\t\t" + effect + "\t\t" + colour);
       }
       results.close();
@@ -92,7 +102,7 @@ public class TriggerRepository {
     catch (SQLException sqlExcept) {
     }
   }
-  
+
 }
 
 
