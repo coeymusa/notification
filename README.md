@@ -14,3 +14,6 @@ When trigger is received it will GET all the lights.
 and their current state, and then perform some modification e.g. color -> RED and post the lights back to be changed.
 
 Further implementation for different effects, triggers and configurablity to be added.
+
+Requires local installation of derby DB 
+http://www.vogella.com/tutorials/ApacheDerby/article.html Section 2-3.4
