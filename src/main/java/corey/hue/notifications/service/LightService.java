@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import corey.hue.notifications.brige.client.HttpClientException;
 import corey.hue.notifications.brige.client.HueClient;
 import corey.hue.notifications.model.Colour;
+import corey.hue.notifications.model.Effect;
 import corey.hue.notifications.model.Light;
 
 @Service
@@ -15,21 +16,21 @@ public class LightService {
 
   private HueClient client = new HueClient();
 
-  public void handleRequest(String triggerEffect, Colour colour) throws HttpClientException {
+  public void handleRequest(Effect effect, double[] colour) throws HttpClientException {
     List<Light> ligthsPreviousState = client.getLights(null);
 
     //useEffect
     //PostChanges
-    client.postLights(changeLights(triggerEffect,colour,ligthsPreviousState));
+    client.postLights(changeLights(effect,colour,ligthsPreviousState));
     //RevertChanges
 
   }
   
-  private List<Light> changeLights(String effect, Colour colour, List<Light> lights){
+  private List<Light> changeLights(Effect effect, double[] colour, List<Light> lights){
     lights.forEach(light ->{
       light.getState().setOn(true);
-      light.getState().setEffect(effect);
-      light.getState().setHue(colour.getValue());
+      light.getState().setEffect(effect.getValue());
+      light.getState().setXy(colour);
     });
     return lights;
   }

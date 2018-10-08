@@ -12,7 +12,7 @@ public enum Effect {
     this.effect = effect;
   }
 
-  public String getEffect() {
+  public String getValue() {
     return effect;
   }
  

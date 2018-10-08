@@ -3,22 +3,23 @@ package corey.hue.notifications.model;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Colour {
-  RED(0),
-  BLUE(46920),
-  GREEN(25500);
+  RED(new double[]{0.70, 0.25}),
+  BLUE(new double[]{0.15,0.22}),
+  GREEN(new double[]{0.10,0.80});
 
-  private int hue;
+  private double[] hue;
   
-  Colour(int bri){
-    this.hue = bri;
+  Colour(double[] hue){
+    this.hue = hue;
   }
 
-  public int getValue() {
+  public double[] getValue() {
     return this.hue;
   }
   
   @JsonValue
   public int toValue() {
+      
       return ordinal();
   }
   

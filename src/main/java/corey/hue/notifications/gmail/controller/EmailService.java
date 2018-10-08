@@ -31,7 +31,7 @@ public class EmailService {
     triggers.forEach(trigger -> {
       if(email.getBody().contains(trigger.getName())){
         try {
-          lightService.handleRequest("colorloop", Colour.BLUE);
+          lightService.handleRequest(trigger.getEffect(),trigger.getColour());
         } catch (HttpClientException e) {
           e.printStackTrace();
         }

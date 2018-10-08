@@ -1,5 +1,6 @@
 package corey.hue.notifications.trigger;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import corey.hue.notifications.model.Trigger;
 public class TriggerRepository {
 
   private static String dbURL = "jdbc:derby://localhost:1527/HueDB;create=true";
-  private static String tableName = "triggers";
+  private static String tableName = "triggers1";
   // jdbc Connection
   private static Connection conn = null;
   private static Statement statement = null;
@@ -38,12 +39,13 @@ public class TriggerRepository {
   private static void createTriggerTable() {
     try{
       statement = conn.createStatement();
-      statement.execute("CREATE TABLE " + tableName + " (id INTEGER not NULL, name VARCHAR(255) , effect VARCHAR(255),colour VARCHAR(255))");
+     statement.execute("CREATE TABLE " + tableName + " (id INTEGER not NULL, name VARCHAR(255) , effect VARCHAR(255),colour VARCHAR(255))");
       statement.close();
     } catch( SQLException e ) {
       if( DerbyHelper.tableAlreadyExists(e)){
         return; // That's OK
       }
+      System.err.println(e);
     }
   }
 
@@ -52,7 +54,7 @@ public class TriggerRepository {
       createConnection();
       statement = conn.createStatement();
       String sql = "insert into " + tableName + " values (" +
-          "1, '" + trigger.getName() + "','" + trigger.getEffect() + "','" + trigger.getColour() +"')";
+          "1, '" + trigger.getName() + "','" + trigger.getEffect() + "','" + trigger.toStringXy() +"')";
       statement.execute(sql);
       statement.close();
     }
@@ -80,7 +82,7 @@ public class TriggerRepository {
         String name = results.getString(2);
         String effect = results.getString(3);
         String colour = results.getString(4);
-        trigger.setColour(Colour.valueOf(colour));
+        trigger.setColour(Trigger.fromStringXy(colour));
         trigger.setEffect(Effect.valueOf(effect));
         trigger.setName(name);
         triggers.add(trigger);
