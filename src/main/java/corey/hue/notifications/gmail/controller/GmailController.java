@@ -1,5 +1,6 @@
 package corey.hue.notifications.gmail.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,15 +9,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import corey.hue.notifications.brige.client.HttpClientException;
 import corey.hue.notifications.gmail.model.Email;
 import corey.hue.notifications.model.Trigger;
-import corey.hue.notifications.trigger.TriggerRepository;
-import corey.hue.notifications.trigger.TriggerService;
+import corey.hue.notifications.trigger.TriggerBusinessService;
 
 @Controller
 @RequestMapping("/")
 public class GmailController {
+
+  @Autowired
+  private EmailService service;
   
-  private EmailService service = new EmailService();
-  private TriggerBusinessService triggerService = new TriggerBusinessService();
+  @Autowired
+  private TriggerBusinessService triggerService;
+
   //Receives requests from a webhook. Currently using automate.io which is connected to gmail account - triggering upon receipt of new email 
   //Sending From, Subject, Body
   @RequestMapping(method = RequestMethod.POST)
@@ -24,11 +28,11 @@ public class GmailController {
     service.handleEmail(email);
     return ResponseEntity.ok().build();
   }
-  
+
   @RequestMapping(value = "/addtrigger", method = RequestMethod.POST)
   public ResponseEntity<String> addTrigger(@RequestBody Trigger trigger) throws HttpClientException{
     triggerService.addTrigger(trigger);
     return ResponseEntity.ok().build();
   }
- 
+
 }
