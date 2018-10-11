@@ -1,9 +1,19 @@
 package corey.hue.notifications.model;
 
-public class Trigger {
+import javax.swing.text.Element;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+@Document
+public class Trigger {
+  
+  @Id
+  @Field("name")
   private String name;
+  @Field("effect")
   private Effect effect;
+  @Field("colour")
   private double[] colour;
 
   public Effect getEffect() {
@@ -38,9 +48,6 @@ public class Trigger {
     double y=     Double.valueOf(split[1]);
     double[] xy= new double[]{x,y};
     return xy;
-  } 
-
-
-
+  }
 
 }
