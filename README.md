@@ -15,8 +15,8 @@ and their current state, and then perform some modification e.g. color -> RED an
 
 Further implementation for different effects, triggers and configurablity to be added.
 
-Requires local installation of derby DB 
-http://www.vogella.com/tutorials/ApacheDerby/article.html Section 2-3.4
+Requires local installation of MongoDB-
+https://docs.mongodb.com/v3.2/tutorial/install-mongodb-on-windows/
 
 To add Trigger: POST http://localhost:7077/addtrigger
 
