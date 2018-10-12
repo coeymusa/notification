@@ -5,7 +5,14 @@ public class Email {
   private String fromEmail;
   private String fromName;
   private String body;
-  
+  private String subject;
+    
+  public String getSubject() {
+    return subject;
+  }
+  public void setSubject(String subject) {
+    this.subject = subject;
+  }
   public String getFromEmail() {
     return fromEmail;
   }

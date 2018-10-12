@@ -1,4 +1,4 @@
-package corey.hue.notficiations.bridge.client;
+package corey.hue.notficiations.client;
 
 import java.io.IOException;
 import java.util.ArrayList;

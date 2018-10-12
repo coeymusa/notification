@@ -1,21 +1,18 @@
 package corey.hue.notifications.service;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import corey.hue.notifications.brige.client.HttpClientException;
-import corey.hue.notifications.brige.client.HueClient;
-import corey.hue.notifications.model.Colour;
+import corey.hue.notifications.client.HttpClientException;
+import corey.hue.notifications.client.HueClient;
 import corey.hue.notifications.model.Effect;
 import corey.hue.notifications.model.Light;
 
 @Service
 public class LightService {
-
-  private HueClient client = new HueClient();
+  
+  @Autowired
+  private HueClient client;
+  
   boolean wait = true;
   public void handleRequest(Effect effect, double[] colour) throws HttpClientException, InterruptedException {
     List<Light> oldLights = client.getLights(null);

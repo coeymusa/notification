@@ -1,4 +1,4 @@
-package corey.hue.notifications.brige.client;
+package corey.hue.notifications.client;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,8 +24,9 @@ public class HueClient {
   private static final String USERNAME = "-pANyxiz-cp5GhL2wSXOELEBfClWStqaKs5mXGQr";
   public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
-  private OkHttpClient httpClient = new OkHttpClient();
-  
+  @Autowired
+  private OkHttpClient httpClient;
+
   @Value("${corey.hue.client.ip:192.168.0.8}")
   private String hueIp; 
 
@@ -81,7 +82,7 @@ public class HueClient {
     });
 
     return responses;
-  
+
 
 
   }
@@ -93,8 +94,8 @@ public class HueClient {
     //remove error
     //[{"error":{"type":8,"address":"/lights/1/state","description":"parameter, /lights/1/state, is not modifiable"}}
     return obj.toString();
-    
-    
+
+
   }
 
   private Light setVariablesForLight( String jsonString, int i) throws JSONException {

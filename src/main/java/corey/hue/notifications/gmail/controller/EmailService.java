@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import corey.hue.notifications.brige.client.HttpClientException;
+import corey.hue.notifications.client.HttpClientException;
 import corey.hue.notifications.gmail.model.Email;
 import corey.hue.notifications.model.Trigger;
 import corey.hue.notifications.service.LightService;
@@ -30,7 +30,7 @@ public class EmailService {
 
         if(email != null){
           triggers.forEach(trigger -> {
-            if(email.getBody().toLowerCase().contains((trigger.getName().toLowerCase()))){
+            if(email.getSubject().toLowerCase().contains((trigger.getName().toLowerCase()))){
               try {
                 lightService.handleRequest(trigger.getEffect(),trigger.getColour());
               } catch (HttpClientException | InterruptedException e) {
