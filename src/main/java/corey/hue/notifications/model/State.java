@@ -24,6 +24,10 @@ public class State {
   public void setOn(boolean on) {
     this.on = on;
   }
+  public boolean getOn() {
+    return on;
+  }
+  
   public int getBri() {
     return bri;
   }

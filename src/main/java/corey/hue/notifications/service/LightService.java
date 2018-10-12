@@ -19,9 +19,10 @@ public class LightService {
   boolean wait = true;
   public void handleRequest(Effect effect, double[] colour) throws HttpClientException, InterruptedException {
     List<Light> oldLights = client.getLights(null);
-    List<Light> newLights = client.getLights(null);
+    List<Light> newLights = changeLights(effect,colour,client.getLights(null));
+    
     //PostChanges
-    client.postLights(changeLights(effect,colour,newLights));
+    client.postLights(newLights);
     //RevertChanges
     Thread.sleep(30);
     client.postLights(oldLights);
