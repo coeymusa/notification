@@ -32,9 +32,7 @@ public class HueClient {
 
   @SuppressWarnings("unchecked")
   public List<Light> getLights(String id) throws HttpClientException  {
-    List<Light> lights = new ArrayList<Light>();
     try {
-
       Request request = new Request.Builder()
           .url(buildUrlForGetLights())
           .build();
@@ -42,25 +40,12 @@ public class HueClient {
       Response response = httpClient.newCall(request).execute();
       String responseBody= response.body().string();
 
-      //if no specific requested get all
-      if(id == null){
-        final JSONObject obj = new JSONObject(responseBody);
-        for(int i = 1; i < obj.length() + 1;i++){
-          Light light = setVariablesForLight(responseBody, i);
-          lights.add(light);
-        }
-        //get light with id
-      }else{
-        Light light = setVariablesForLight(responseBody,Integer.valueOf(id));
-        lights.add(light);
-      }
-
-      return lights;
-
+      return  populateLightsFromResponseBody(id,responseBody);
     } catch (IOException | JSONException err) {
       throw new HttpClientException("Error whilst requesting light data", err);
     }
   }
+
 
   public List<String> postLights(List<Light> lights) throws HttpClientException{
     List<String> responses = new ArrayList();
@@ -80,22 +65,35 @@ public class HueClient {
         System.out.println(err);
       }
     });
-
     return responses;
-
-
-
+  }
+  
+  private List<Light> populateLightsFromResponseBody(String id, String responseBody) throws NumberFormatException, JSONException {
+    List<Light> lights = new ArrayList<Light>();
+    //if no specific requested get all
+    if(id == null){
+      final JSONObject obj = new JSONObject(responseBody);
+      for(int i = 1; i < obj.length() + 1;i++){
+        Light light = setVariablesForLight(responseBody, i);
+        lights.add(light);
+      }
+      //get light with id
+    }else{
+      Light light = setVariablesForLight(responseBody,Integer.valueOf(id));
+      lights.add(light);
+    }
+    return lights;
   }
 
   private String removeUnavailableParams(String jsonString) throws JSONException {
     final JSONObject obj = new JSONObject(jsonString);
-    obj.remove("colorMode");
-    obj.remove("reachable");
-    //remove error
-    //[{"error":{"type":8,"address":"/lights/1/state","description":"parameter, /lights/1/state, is not modifiable"}}
+    if(obj.get("colorMode") != null){
+      obj.remove("colorMode");
+    }
+    if(obj.get("reachable") != null){
+      obj.remove("reachable");
+    }
     return obj.toString();
-
-
   }
 
   private Light setVariablesForLight( String jsonString, int i) throws JSONException {
@@ -119,7 +117,6 @@ public class HueClient {
         .addPathSegment(USERNAME)
         .addPathSegment("lights")
         .build();
-
     return url;
   }
 
@@ -133,9 +130,7 @@ public class HueClient {
         .addPathSegment(id)
         .addPathSegment("state")
         .build();
-
     return url;
   }
-
 
 }

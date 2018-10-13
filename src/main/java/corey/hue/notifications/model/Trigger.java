@@ -17,7 +17,7 @@ public class Trigger {
   @Field("colour")
   private double[] colour;
   
-  Trigger(){
+  public Trigger(){
     this._id = UUID.randomUUID();
   }
    

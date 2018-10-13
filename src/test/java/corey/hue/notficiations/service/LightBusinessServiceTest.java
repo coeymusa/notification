@@ -12,7 +12,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import corey.hue.notifications.client.HttpClientException;
 import corey.hue.notifications.client.HueClient;

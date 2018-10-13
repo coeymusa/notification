@@ -1,9 +1,5 @@
 package corey.hue.notifications.model;
 
-import java.util.List;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Light {
 
   private int id;
@@ -42,7 +38,5 @@ public class Light {
   public void setUniqueId(String uniqueId) {
     this.uniqueId = uniqueId;
   }
-
-
-
+  
 }

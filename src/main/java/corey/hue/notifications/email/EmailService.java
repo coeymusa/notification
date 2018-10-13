@@ -1,4 +1,4 @@
-package corey.hue.notifications.gmail.controller;
+package corey.hue.notifications.email;
 
 import java.util.ArrayList;
 import java.util.List;
