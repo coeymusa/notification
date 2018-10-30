@@ -19,4 +19,9 @@ public class TriggerBusinessService {
     return repo.findAll();
   }
 
+  public Trigger removeTrigger(Trigger trigger) {
+     repo.delete(trigger);
+     return trigger;
+  }
+
 }

@@ -29,25 +29,23 @@ public class HueController {
   
   @Autowired
   private TriggerBusinessService triggerService;
-//
-//  
-//  @RequestMapping(value = "/lights", method = RequestMethod.GET)
-//  public List<Light> getAllLights() throws JsonProcessingException, HttpClientException{
-//    return client.getLights(null);
-//  }
-  
+
   @RequestMapping(value = "/triggers", method= RequestMethod.GET)
   public List<Trigger> getAllTriggers(){
     return triggerService.findAllTriggers();
   }
-
+  
+  @CrossOrigin()
+  @PostMapping(value = "/removeTrigger")
+  public ResponseEntity<Trigger> removeTrigger(@RequestBody Trigger trigger) throws HttpClientException{
+    return ResponseEntity.ok(triggerService.removeTrigger(trigger));
+  }
+  
   @CrossOrigin()
   @PostMapping(value = "/lights")
   public ResponseEntity<Light> handleLight(@RequestBody SimpleLight light) throws HttpClientException{
     return ResponseEntity.ok(service.handleUILight(light));
   }
-  
-
   
   @RequestMapping(value = "/lights", method = RequestMethod.GET)
   public List<SimpleLight> getLights() throws  JsonProcessingException, HttpClientException{
