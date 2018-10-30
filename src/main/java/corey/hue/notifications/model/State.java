@@ -100,6 +100,7 @@ public class State {
     state.setSat(obj.getInt("sat"));
     state.setEffect(obj.getString("effect"));
     state.setOn(obj.getBoolean("on"));
+    state.setReachable(obj.getBoolean("reachable"));
     JSONArray outerArray = obj.getJSONArray("xy");
    
     double[] xy = parseXy(outerArray);

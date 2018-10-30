@@ -1,8 +1,8 @@
-package corey.hue.notifications.trigger;
+package corey.hue.notficiations.trigger;
 
 import corey.hue.notifications.model.Trigger;
 
-public class TriggerService {
+public class TriggerServiceTest {
 
   public void addTrigger(Trigger trigger) {
     // TODO Auto-generated method stub
