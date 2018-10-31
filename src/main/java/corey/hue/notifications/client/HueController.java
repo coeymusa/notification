@@ -34,12 +34,7 @@ public class HueController {
   public List<Trigger> getAllTriggers(){
     return triggerService.findAllTriggers();
   }
-  
-  @CrossOrigin()
-  @PostMapping(value = "/removeTrigger")
-  public ResponseEntity<Trigger> removeTrigger(@RequestBody Trigger trigger) throws HttpClientException{
-    return ResponseEntity.ok(triggerService.removeTrigger(trigger));
-  }
+
   
   @CrossOrigin()
   @PostMapping(value = "/lights")
