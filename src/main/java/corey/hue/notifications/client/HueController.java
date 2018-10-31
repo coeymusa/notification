@@ -41,6 +41,14 @@ public class HueController {
     return ResponseEntity.ok(triggerService.removeTrigger(trigger));
   }
   
+  
+  @CrossOrigin()
+  @RequestMapping(value = "/addtrigger", method = RequestMethod.POST)
+  public ResponseEntity<String> addTrigger(@RequestBody Trigger trigger) throws HttpClientException{
+    triggerService.addTrigger(trigger);
+    return ResponseEntity.ok().build();
+  }
+  
   @CrossOrigin()
   @PostMapping(value = "/lights")
   public ResponseEntity<Light> handleLight(@RequestBody SimpleLight light) throws HttpClientException{
