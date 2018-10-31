@@ -29,5 +29,10 @@ public class EmailController {
     return ResponseEntity.ok().build();
   }
 
+  @RequestMapping(value = "/addtrigger", method = RequestMethod.POST)
+  public ResponseEntity<String> addTrigger(@RequestBody Trigger trigger) throws HttpClientException{
+    triggerService.addTrigger(trigger);
+    return ResponseEntity.ok().build();
+  }
 
 }
