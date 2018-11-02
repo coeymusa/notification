@@ -1,6 +1,9 @@
 package corey.hue.notifications.lights;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,12 @@ public class LightBusinessService {
 	@Autowired
 	private HueClient client;
 
+	private static final Logger logger = LoggerFactory.getLogger(LightBusinessService.class);
+	
 	boolean wait = true;
+	
 	public void handleRequest(Effect effect, double[] colour) throws HttpClientException, InterruptedException {
+		logger.debug("Updating lights");
 		List<Light> oldLights = client.getLights(null);
 		List<Light> newLights = changeLights(effect,colour,client.getLights(null));
 
@@ -28,6 +35,7 @@ public class LightBusinessService {
 
 
 	public List<SimpleLight> uiLights() throws HttpClientException {
+		logger.debug("Getting lights for ui");
 		List<Light> lights = client.getLights(null);
 		List<SimpleLight> simpleLights = new ArrayList<SimpleLight>();
 		lights.forEach(light -> {
@@ -37,6 +45,7 @@ public class LightBusinessService {
 	}
 
 	public Light handleUILight(SimpleLight simpleLight) throws HttpClientException {
+		logger.debug("Posting lights from ui");
 		List<Light> lights = new ArrayList<Light>();
 		Light light = UiLightToLight(simpleLight);
 		lights.add(light);
@@ -45,6 +54,7 @@ public class LightBusinessService {
 	}
 
 	public List<Light> turnLightsOn(List<Light> lights){
+		logger.debug("Turning lights on");
 		lights.forEach(light ->{
 			if(light.getState().isOn() == false){
 				light.getState().setOn(true);
@@ -53,8 +63,8 @@ public class LightBusinessService {
 		return lights;
 	}
 
-
 	public List<Light> turnLightsOff(List<Light> lights){
+		logger.debug("Turning lights off");
 		lights.forEach(light ->{
 			if(light.getState().isOn() == true){
 				light.getState().setOn(false);

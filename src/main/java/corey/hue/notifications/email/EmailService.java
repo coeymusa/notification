@@ -2,6 +2,8 @@ package corey.hue.notifications.email;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,17 +25,19 @@ public class EmailService {
 
 	@Autowired
 	LightBusinessService lightService = new LightBusinessService();
+	
+	private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
 
 	public void handleEmail(Email email) throws HttpClientException {
 		List<Trigger> triggers = triggerService.findAllTriggers();
-
 		if(email != null){
+			logger.debug("Received new email with subject: " + email.getSubject());
 			triggers.forEach(trigger -> {
 				if(email.getSubject().toLowerCase().contains((trigger.getName().toLowerCase()))){
 					try {
 						lightService.handleRequest(trigger.getEffect(),trigger.getColour());
 					} catch (HttpClientException | InterruptedException e) {
-						e.printStackTrace();
+						logger.error(e.toString());
 					}
 				}
 			});
