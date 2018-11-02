@@ -1,4 +1,4 @@
-package corey.hue.notifications.client;
+package corey.hue.notifications.lights;
 
 public class HttpClientException extends Exception {
 

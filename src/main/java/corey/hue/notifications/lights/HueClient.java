@@ -1,4 +1,4 @@
-package corey.hue.notifications.client;
+package corey.hue.notifications.lights;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ public class HueClient {
   @Value("${corey.hue.client.ip:192.168.0.8}")
   private String hueIp; 
 
-  @SuppressWarnings("unchecked")
   public List<Light> getLights(String id) throws HttpClientException  {
     try {
       Request request = new Request.Builder()

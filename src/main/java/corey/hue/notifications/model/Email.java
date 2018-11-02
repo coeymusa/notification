@@ -1,4 +1,4 @@
-package corey.hue.notifications.gmail.model;
+package corey.hue.notifications.model;
 
 public class Email {
 

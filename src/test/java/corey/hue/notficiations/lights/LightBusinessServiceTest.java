@@ -1,10 +1,12 @@
-package corey.hue.notficiations.service;
+package corey.hue.notficiations.lights;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,19 +15,20 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import corey.hue.notifications.client.HttpClientException;
-import corey.hue.notifications.client.HueClient;
+
+import corey.hue.notifications.lights.HttpClientException;
+import corey.hue.notifications.lights.HueClient;
+import corey.hue.notifications.lights.LightBusinessService;
 import corey.hue.notifications.model.Effect;
 import corey.hue.notifications.model.Light;
 import corey.hue.notifications.model.State;
 import corey.hue.notifications.model.Trigger;
-import corey.hue.notifications.service.LightService;
-import corey.hue.notifications.trigger.TriggerRepository;
+import corey.hue.notifications.triggers.TriggerRepository;
 
 public class LightBusinessServiceTest {
 
   @InjectMocks
-  private LightService underTest;
+  private LightBusinessService underTest;
   
   @Mock
   private HueClient hueClient;

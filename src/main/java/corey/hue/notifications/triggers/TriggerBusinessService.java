@@ -1,4 +1,4 @@
-package corey.hue.notifications.trigger;
+package corey.hue.notifications.triggers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

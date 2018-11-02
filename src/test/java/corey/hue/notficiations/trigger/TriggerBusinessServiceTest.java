@@ -9,8 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import corey.hue.notifications.model.Trigger;
-import corey.hue.notifications.trigger.TriggerBusinessService;
-import corey.hue.notifications.trigger.TriggerRepository;
+import corey.hue.notifications.triggers.TriggerBusinessService;
+import corey.hue.notifications.triggers.TriggerRepository;
 
 public class TriggerBusinessServiceTest {
 

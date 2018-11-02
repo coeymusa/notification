@@ -7,11 +7,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import corey.hue.notifications.client.HttpClientException;
+
 import corey.hue.notifications.email.EmailController;
 import corey.hue.notifications.email.EmailService;
-import corey.hue.notifications.gmail.model.Email;
-import corey.hue.notifications.trigger.TriggerBusinessService;
+import corey.hue.notifications.lights.HttpClientException;
+import corey.hue.notifications.model.Email;
+import corey.hue.notifications.triggers.TriggerBusinessService;
 
 public class EmailControllerTest {
 

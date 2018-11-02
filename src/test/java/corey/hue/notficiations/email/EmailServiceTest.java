@@ -3,20 +3,23 @@ package corey.hue.notficiations.email;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import corey.hue.notifications.client.HttpClientException;
+
 import corey.hue.notifications.email.EmailService;
-import corey.hue.notifications.gmail.model.Email;
+import corey.hue.notifications.lights.HttpClientException;
+import corey.hue.notifications.lights.LightBusinessService;
 import corey.hue.notifications.model.Effect;
+import corey.hue.notifications.model.Email;
 import corey.hue.notifications.model.Trigger;
-import corey.hue.notifications.service.LightService;
-import corey.hue.notifications.trigger.TriggerBusinessService;
+import corey.hue.notifications.triggers.TriggerBusinessService;
 
 public class EmailServiceTest {
 
@@ -27,7 +30,7 @@ public class EmailServiceTest {
   private TriggerBusinessService triggerService;
 
   @Mock
-  LightService lightService;
+  LightBusinessService lightService;
 
   @Before
   public void setup() {

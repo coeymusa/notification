@@ -6,10 +6,11 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import corey.hue.notifications.client.HttpClientException;
+
+import corey.hue.notifications.lights.HttpClientException;
 import corey.hue.notifications.model.Trigger;
-import corey.hue.notifications.trigger.TriggerBusinessService;
-import corey.hue.notifications.trigger.TriggerController;
+import corey.hue.notifications.triggers.TriggerBusinessService;
+import corey.hue.notifications.triggers.TriggerController;
 public class TriggerControllerTest {
   
   @InjectMocks
